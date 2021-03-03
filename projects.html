@@ -59,7 +59,7 @@ plays::before{
 			node.innerHTML = "<img src='" + project.screenshot_url + "'><br>" + project.title + "<hearts>" + project.number_of_stars + "</hearts><plays>" + project.play_count + "</plays>"
 			node.uuid = project.uuid
 			node.onclick = function(){
-				window.location = "https://c.gethopscotch.com/p/" + this.uuid
+				open("https://c.gethopscotch.com/p/" + this.uuid)
 			}
 			document.body.appendChild(node)
 		}
