@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<style type="text/css" media="all">
+body{
+	background-color: #222;
+	color: white;
+	font-family: sans-serif
+}
+project{
+	display: block;
+	border: 2px solid white;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 20px;
+	background-color: black;
+	box-shadow: 5px 5px white
+}
+img{
+	width: 100px;
+	transform: scale(0.7);
+}
+hearts, plays{
+	color: #ccc;
+	margin: 20px;
+	padding: 2px;
+	background-color: #222;
+	border-radius: 5px
+}
+hearts::before{
+	content: "❤️";
+}
+plays::before{
+	content: "▶️";
+}
+</style>
+<body>
+</body>
+<script type="text/javascript" charset="utf-8">
+	var json = ""
+	var userid = "5270036"
+	var page = 1
+	var path = "published_projects"
+	var rlink = `https://community.gethopscotch.com/api/v2/users/${userid}/${path}?page=${page}&api_token=4f7769439adf7ef8e482d2daef77375cd6d0158b65fcdca543b74b5c0c92&user%5Bauth_token%5D=qKok4lCx8YB9Wgp%2Bo862AA%3D%3D&user%5Bid%5D=4753230`
+	var link =  `https://api.allorigins.win/git?url=${encodeURIComponent(rlink)}`
+	fetch(link).then(x => x.text()).then(function(a){json = JSON.parse(a)/*; console.log(json)*/}).then(function(){
+	if(json.status.http_code == 200){
+		var ps = JSON.parse(json.contents)
+		console.log(ps)
+		document.body.innerHTML = "<h1>" + ps.projects[0].user.nickname + "'s latest projects" + "</h1>"
+		for(projectind in ps.projects){
+			var project = ps.projects[projectind]
+			var node = document.createElement("project")
+			node.innerHTML = "<img src='" + project.screenshot_url + "'><br>" + project.title + "<hearts>" + project.number_of_stars + "</hearts><plays>" + project.play_count + "</plays>"
+			node.uuid = project.uuid
+			node.onclick = function(){
+				window.location = "https://c.gethopscotch.com/p/" + this.uuid
+			}
+			document.body.appendChild(node)
+		}
+	}else{
+		document.write("Unexpected response code " + json.status.http_code)
+	}
+	})
+</script>
+
+</html>
