@@ -25,7 +25,7 @@ img{
 	width: 100px;
 	transform: scale(0.7);
 }
-hearts, plays{
+hearts, plays, plants,publ{
 	color: #ccc;
 	margin: 20px;
 	padding: 2px;
@@ -38,6 +38,8 @@ hearts::before{
 plays::before{
 	content: "▶️";
 }
+publ:before{content:"📅";}
+plants:before{content:"🌱";}
 </style>
 <body>
 </body>
@@ -56,7 +58,8 @@ plays::before{
 		for(projectind in ps.projects){
 			var project = ps.projects[projectind]
 			var node = document.createElement("project")
-			node.innerHTML = "<img src='" + project.screenshot_url + "'><br>" + project.title + "<hearts>" + project.number_of_stars + "</hearts><plays>" + project.play_count + "</plays>"
+                        var dt = new Date(project.correct_published_at);
+			node.innerHTML = "<img src='" + project.screenshot_url + "'><br>" + project.title + "<hearts>" + project.number_of_stars + "</hearts><plays>" + project.play_count + "</plays><plants>"+project.plants+"</plants><publ>"+dt.getDate()+'/'+(dt.getMonths()+1)+'/'+dt.getFullYear()+'</publ>';
 			node.uuid = project.uuid
 			node.onclick = function(){
 				window.location = "https://c.gethopscotch.com/p/" + this.uuid
