@@ -51,7 +51,7 @@ plants:before{content:"🌱";}
 	var page = 1
 	var path = "published_projects"
 	var rlink = `https://community.gethopscotch.com/api/v2/users/${userid}/${path}?page=${page}&api_token=4f7769439adf7ef8e482d2daef77375cd6d0158b65fcdca543b74b5c0c92&user%5Bauth_token%5D=qKok4lCx8YB9Wgp%2Bo862AA%3D%3D&user%5Bid%5D=4753230`
-	var link =  `https://api.allorigins.win/git?url=${encodeURIComponent(rlink)}`
+	var link =  `https://api.allorigins.win/get?url=${encodeURIComponent(rlink)}`
 	fetch(link).then(x => x.text()).then(function(a){json = JSON.parse(a)/*; console.log(json)*/}).then(function(){
 	if(json.status.http_code == 200){
 		var ps = JSON.parse(json.contents)
