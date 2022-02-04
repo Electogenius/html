@@ -10,7 +10,7 @@
 body{
 	background-color: #222;
 	color: white;
-	font-family: sans-serif;
+	font-family: Avenir, system-ui, sans-serif;
 	scroll-snap-type: both proximity;
 }
 project{
@@ -56,7 +56,7 @@ plants:before{content:"🌱";}
 	if(json.status.http_code == 200){
 		var ps = JSON.parse(json.contents)
 		console.log(ps)
-		document.body.innerHTML = "<h1>" + ps.projects[0].user.nickname + "'s latest projects" + "</h1>"
+		document.body.innerHTML = "<h1>" + ps.projects[0].user.nickname + "'s terrible latest projects" + "</h1>"
 		for(projectind in ps.projects){
 			var project = ps.projects[projectind]
 			var node = document.createElement("project")
